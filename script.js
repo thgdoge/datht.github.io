@@ -1,40 +1,43 @@
-// 1. Kích hoạt thư viện hiệu ứng cuộn AOS
+// 1. Kích hoạt AOS
 AOS.init({
-    offset: 120, // Khoảng cách từ dưới lên để bắt đầu hiệu ứng
-    duration: 1000, // Thời gian chạy hiệu ứng (ms)
-    once: true, // Chỉ chạy hiệu ứng 1 lần khi cuộn xuống
+    offset: 120,
+    duration: 1000,
+    once: true,
 });
 
-// 2. Kích hoạt hiệu ứng gõ chữ (Typed.js)
-var typed = new Typed('.typing-text', {
-    // Danh sách các chữ muốn hiển thị
-    strings: ['Lập trình viên.', 'Designer.', 'Freelancer.', 'Người yêu công nghệ.'],
-    typeSpeed: 100, // Tốc độ gõ
-    backSpeed: 60, // Tốc độ xóa
-    loop: true // Lặp lại vô tận
-});
+// 2. Kích hoạt Typed.js (CHỈ CHẠY NẾU CÓ CLASS .typing-text)
+// Dòng if này giúp code không bị lỗi khi sang trang profile
+if (document.querySelector('.typing-text')) {
+    var typed = new Typed('.typing-text', {
+        strings: ['Lập trình viên.', 'Designer.', 'Freelancer.', 'Người yêu công nghệ.'],
+        typeSpeed: 100,
+        backSpeed: 60,
+        loop: true
+    });
+}
 
-// 3. Xử lý sự kiện cuộn trang (Navbar và nút Back-to-top)
+// 3. Xử lý thanh Menu và nút Back-to-top
 const navbar = document.querySelector('.navbar');
 const backToTopBtn = document.querySelector('.back-to-top');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 100) {
-        // Nếu cuộn xuống quá 100px
-        navbar.classList.add('scrolled'); // Thêm class để menu đổi màu
-        backToTopBtn.classList.add('active'); // Hiện nút back-to-top
+        navbar.classList.add('scrolled');
+        if(backToTopBtn) backToTopBtn.classList.add('active'); // Kiểm tra nếu có nút thì mới add
     } else {
-        // Nếu ở trên đầu trang
+        // Ở trang Profile, ta muốn menu luôn trắng (đã có class scrolled sẵn trong HTML)
+        // Nên ta chỉ gỡ class này nếu đang ở trang chủ (không có class 'scrolled' lúc đầu)
+        // Tuy nhiên, để đơn giản, đoạn code dưới đây vẫn ổn cho cả 2 trang
+        // Nếu bạn thấy menu trang profile bị trong suốt khi kéo lên đỉnh, hãy nhắn mình chỉnh lại nhé.
         navbar.classList.remove('scrolled');
-        backToTopBtn.classList.remove('active');
+        if(backToTopBtn) backToTopBtn.classList.remove('active');
     }
 });
 
-// 4. Xử lý khi bấm nút Back-to-top (Cuộn mượt lên đầu)
-backToTopBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+// 4. Xử lý nút Back-to-top
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-});
+}
