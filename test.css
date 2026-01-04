@@ -1,0 +1,137 @@
+/* --- CÀI ĐẶT CHUNG --- */
+:root {
+    --primary-color: #ff4757; /* Màu đỏ cam nổi bật */
+    --dark-bg: #2f3542;
+    --light-bg: #f1f2f6;
+    --text-color: #333;
+}
+html { scroll-behavior: smooth; /* Cuộn trang mượt mà */ }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Poppins', sans-serif; color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 80px 0; }
+.section-title { text-align: center; font-size: 2.2rem; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 2px; position: relative; }
+/* Tạo gạch chân nhỏ dưới tiêu đề */
+.section-title::after {
+    content: ''; display: block; width: 60px; height: 3px; background: var(--primary-color); margin: 15px auto 0;
+}
+.text-white { color: white; }
+.bg-dark { background-color: var(--dark-bg); color: white; }
+
+/* --- NAVIGATION --- */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 50px; 
+    background: transparent; /* Ban đầu trong suốt */
+    position: fixed; /* Cố định trên cùng */
+    width: 100%; top: 0; z-index: 1000;
+    transition: 0.4s; /* Hiệu ứng chuyển màu mượt mà */
+}
+/* Class này sẽ được JS thêm vào khi cuộn xuống */
+.navbar.scrolled {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px 50px; /* Thu nhỏ lại một chút khi cuộn */
+}
+
+.logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
+.nav-links { display: flex; gap: 25px; }
+.nav-links a { font-weight: 500; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary-color); }
+.btn-contact { background: var(--primary-color); color: white !important; padding: 8px 20px; border-radius: 20px; transition: 0.3s; }
+.btn-contact:hover { background: var(--dark-bg); transform: scale(1.05); }
+
+/* --- HERO SECTION --- */
+.hero {
+    height: 100vh; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #ffffff 50%, #f1f2f6 50%);
+    padding-top: 80px; /* Bù trừ cho fixed navbar */
+}
+.hero-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1100px; padding: 0 20px; }
+.hero-text { flex: 1; }
+.hero-text h3 { font-size: 1.5rem; color: #555; }
+.hero-text h1 { font-size: 3.5rem; color: var(--dark-bg); margin: 10px 0; line-height: 1.2; }
+.highlight { color: var(--primary-color); font-weight: bold; }
+
+/* Hiệu ứng con trỏ nhấp nháy của Typed.js */
+.typed-cursor { color: var(--primary-color); font-size: 1.5rem; }
+
+.social-icons { margin: 30px 0; }
+.social-icons a {
+    display: inline-flex; width: 45px; height: 45px; background: white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    justify-content: center; align-items: center; border-radius: 50%; margin-right: 15px;
+    transition: 0.3s; font-size: 1.2rem; color: var(--dark-bg);
+}
+.social-icons a:hover { background: var(--primary-color); color: white; transform: translateY(-5px); }
+
+.btn-main {
+    display: inline-block; background: var(--dark-bg); color: white;
+    padding: 12px 35px; border-radius: 30px; font-weight: bold; transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.btn-main:hover { background: var(--primary-color); transform: translateY(-3px); box-shadow: 0 15px 25px rgba(255, 71, 87, 0.4); }
+
+.hero-img { flex: 1; text-align: right; }
+.hero-img img {
+    width: 400px; height: 400px; border-radius: 50%; object-fit: cover;
+    border: 8px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    animation: float 6s ease-in-out infinite; /* Hiệu ứng ảnh bay nhẹ */
+}
+/* Định nghĩa hiệu ứng bay */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- ABOUT & GENERAL --- */
+.about-content { text-align: center; max-width: 800px; margin: 0 auto; }
+.info-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;
+    margin-top: 40px; text-align: left;
+}
+.info-grid div { background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+.info-grid div:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+.info-grid i { color: var(--primary-color); margin-right: 15px; font-size: 1.2rem; }
+
+/* --- SKILLS --- */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+.skill-card {
+    background: rgba(255,255,255,0.05); padding: 40px 30px; border-radius: 15px;
+    text-align: center; transition: 0.4s; border: 1px solid rgba(255,255,255,0.1);
+}
+.skill-card:hover { background: white; transform: translateY(-10px); }
+.skill-card:hover h3, .skill-card:hover p { color: var(--dark-bg); }
+.skill-card i { font-size: 3.5rem; margin-bottom: 20px; display: inline-block; transition: 0.4s; }
+.skill-card:hover i { transform: scale(1.2); }
+
+/* --- PROJECTS --- */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+.project-item {
+    background: white; border-radius: 15px; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: 0.4s;
+}
+.project-item:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+.project-item img { width: 100%; height: 220px; object-fit: cover; transition: 0.4s; }
+.project-item:hover img { transform: scale(1.1); }
+.project-info { padding: 25px; position: relative; background: white; }
+.btn-small { color: var(--primary-color); font-weight: bold; font-size: 1rem; text-decoration: underline; }
+
+/* --- FOOTER --- */
+footer { background: var(--dark-bg); color: white; text-align: center; padding: 30px; margin-top: 80px; }
+
+/* --- NÚT BACK TO TOP --- */
+.back-to-top {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 50px; height: 50px; background: var(--primary-color); color: white;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    font-size: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0; visibility: hidden; /* Ẩn đi khi ở trên đầu trang */
+    transition: 0.4s; z-index: 999;
+}
+/* Class này được JS thêm vào khi cuộn xuống */
+.back-to-top.active { opacity: 1; visibility: visible; bottom: 30px; }
+.back-to-top:hover { background: var(--dark-bg); transform: translateY(-5px); }
